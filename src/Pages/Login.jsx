@@ -10,18 +10,15 @@ const Login = ({ setUser, setToken }) => {
     username: '',
     password_hash: '',
   });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-
   const handleLogin = (e) => {
     e.preventDefault();
-
     fetch(`${API}/users/login`, {
         method: "POST",
         body: JSON.stringify(formData),
@@ -40,16 +37,13 @@ const Login = ({ setUser, setToken }) => {
                     username: '',
                     password_hash: ''
                 }))
-                navigate('/');
+                navigate('/tasks');
             } else {
                 console.log(res)
             }
         })
         .catch(err => console.log(err))
-
-    
   };
-
   return (
     <Container style={{ marginTop: "50px" }}>
       <Row className="justify-content-md-center">
@@ -65,7 +59,6 @@ const Login = ({ setUser, setToken }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -76,7 +69,6 @@ const Login = ({ setUser, setToken }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-
             <Button variant="primary" type="submit">
               Log in
             </Button>
@@ -86,5 +78,4 @@ const Login = ({ setUser, setToken }) => {
     </Container>
   );
 };
-
 export default Login;
